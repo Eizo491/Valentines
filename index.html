@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Special Message For You</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <div id="loadingScreen">
+        <div class="loader-content">
+            <div class="loader-heart">❤️</div>
+            <p class="pixel-text">Loading love...</p>
+        </div>
+    </div>
+
+    <div id="messageOverlay">
+        <h2 id="textContainer"></h2>
+    </div>
+
+    <div id="envelopeContainer" class="hidden-fade">
+        <div class="envelope" onclick="openLetter()">✉️</div>
+        <p class="pixel-text">You have a letter...</p>
+    </div>
+
+    <div id="letterContainer" class="hidden">
+        
+        <div class="window-box" id="questionWindow">
+            <h1 class="question">Will you be my Valentine?</h1>
+            
+            <div class="image-placeholder">
+                <img id="catGif" src="peach-goma-happy-side-to-side.gif" alt="Cute Cat">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn yes-btn" id="yesBtn" onclick="celebrate()">Yes!</button>
+                <button class="btn no-btn" id="noBtn" onclick="handleNo()">No</button>
+            </div>
+        </div>
+
+        <div id="successSection" class="hidden">
+            <h1 class="yippee">YIPPEE! ❤️</h1>
+            
+            <div class="image-placeholder">
+                <img id="happyCat" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3bmZ3JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1z/MDJ9IbxxvDUQM/giphy.gif" alt="Happy Cat">
+            </div>
+
+            <div id="specialMessage" class="pop-up-msg">
+                <p>I LOVEEEEE YOUUUUUU SOOOOOO MUCCCCHHHHHH!!!!!!</p>
+                <p class="final-note">Date night at 7?</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+    <audio id="celebrationSound" src="celebrate.mp3" preload="auto"></audio>
+    <audio id="romanticBgm" src="romantic.mp3" preload="auto" loop></audio>
+    <audio id="squeakSound" src="squeky.mp3" preload="auto"></audio>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+:root {
+    --primary-pink: #ff4d6d;
+    --soft-pink: #ffcad4;
+    --deep-red: #c9184a;
+    --window-bg: #ffffff;
+    --pixel-border: #000000;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--soft-pink);
+    background-image: radial-gradient(var(--primary-pink) 0.8px, transparent 0.8px);
+    background-size: 24px 24px;
+    font-family: 'Pixelify Sans', sans-serif;
+    overflow: hidden;
+    overscroll-behavior: none; 
+    touch-action: manipulation; 
+}
+
+/* --- LOADING SCREEN --- */
+#loadingScreen {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: var(--soft-pink);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease;
+}
+
+.loader-content { text-align: center; color: var(--deep-red); }
+.loader-heart { font-size: 50px; animation: heartBeat 1s infinite; }
+
+@keyframes heartBeat {
+    0%, 30%, 60%, 100% { transform: scale(1); }
+    15% { transform: scale(1.3); }
+    45% { transform: scale(1.15); }
+}
+
+.loader-hidden { opacity: 0; pointer-events: none; }
+
+/* --- FLOATING HEARTS EFFECT --- */
+.floating-heart {
+    position: fixed;
+    font-size: 24px;
+    color: var(--primary-pink);
+    pointer-events: none;
+    z-index: 1000;
+    animation: floatUp 1s ease-out forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+}
+
+/* --- SPEECH BUBBLE (UPDATED FOR LONG MESSAGES) --- */
+.speech-bubble {
+    position: absolute;
+    bottom: 115%; 
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border: 3px solid var(--pixel-border);
+    padding: 12px 18px;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: var(--deep-red);
+    z-index: 1000;
+    box-shadow: 6px 6px 0px rgba(0,0,0,0.1);
+    animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Multi-line support */
+    width: max-content;
+    max-width: 220px;
+    white-space: normal;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+/* --- MAIN UI --- */
+#messageOverlay { position: absolute; text-align: center; width: 90%; z-index: 100; }
+#textContainer { font-size: 2.2rem; color: var(--deep-red); text-shadow: 2px 2px 0px white; line-height: 1.4; }
+#envelopeContainer { text-align: center; cursor: pointer; z-index: 50; }
+.envelope { font-size: 120px; filter: drop-shadow(4px 4px 0px rgba(0,0,0,0.1)); animation: pulse 1.5s infinite ease-in-out; }
+.pixel-text { font-size: 1.2rem; color: var(--deep-red); margin-top: 10px; font-weight: bold; }
+
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+.hidden-fade { opacity: 0; transition: opacity 1.5s ease-in-out; pointer-events: none; }
+.show-fade { opacity: 1 !important; pointer-events: auto !important; }
+
+.window-box {
+    background: var(--window-bg);
+    border: 4px solid var(--pixel-border);
+    box-shadow: 10px 10px 0px var(--deep-red);
+    padding: 2.5rem;
+    text-align: center;
+    width: 90%;
+    max-width: 420px;
+    position: relative;
+    z-index: 10;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), float 3s ease-in-out infinite;
+}
+
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+.shake { animation: shake 0.3s ease-in-out !important; }
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+}
+
+@keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+.question { font-size: 2.2rem; color: var(--pixel-border); margin: 0 0 20px 0; }
+
+.image-placeholder { position: relative; display: inline-block; }
+
+.image-placeholder img, #happyCat {
+    max-width: 250px;
+    height: auto;
+    border: 3px solid var(--pixel-border);
+    background: #fff;
+    margin-bottom: 20px;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.btn-group { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px; min-height: 120px; }
+
+.btn {
+    font-family: 'Pixelify Sans', sans-serif;
+    padding: 12px 28px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 3px solid var(--pixel-border);
+    box-shadow: 4px 4px 0px var(--pixel-border);
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.yes-btn { background-color: #95d5b2; color: black; z-index: 100; }
+.no-btn { 
+    background-color: #ff4d6d; 
+    color: white; 
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Keeps button text on one line */
+}
+
+#successSection { text-align: center; }
+.yippee { font-size: 3.5rem; color: var(--deep-red); margin-bottom: 10px; }
+#happyCat { animation: bounce 0.8s infinite alternate; width: 200px; }
+
+/* --- OPTIONAL COUNTDOWN STYLE --- */
+.countdown-container {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    color: var(--pixel-border);
+    background: #fff0f3;
+    padding: 10px;
+    border: 2px solid var(--pixel-border);
+}
+
+@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-20px); } }
+
+.pop-up-msg {
+    background: white;
+    border: 3px solid var(--pixel-border);
+    box-shadow: 5px 5px 0px var(--deep-red);
+    padding: 15px;
+    margin-top: 20px;
+    transform: scale(0);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.pop-up-msg.show { transform: scale(1); }
+
+.final-note {
+    font-size: 1.1rem;
+    color: var(--pixel-border);
+    margin-top: 10px;
+    background: white;
+    padding: 5px 10px;
+    border: 2px dashed var(--deep-red);
+    display: inline-block;
+}
+
+.hidden { display: none; }
+
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 480px) {
+    .window-box { padding: 1.5rem; width: 85%; }
+    .question { font-size: 1.6rem; }
+    .image-placeholder img { max-width: 180px; }
+    .btn { padding: 10px 12px; font-size: 0.9rem; }
+    .yippee { font-size: 2.5rem; }
+    .speech-bubble { font-size: 0.8rem; max-width: 150px; }
+}
